@@ -1,8 +1,4 @@
-// export const ADD_TODO = 'ADD_TODO';
-// export const CLEAR_CHECKED_TODOS = 'CLEAR_CHECKED_TODOS';
-// export const CHECK_TODO = 'CHECK_TODO';
-// export const CHECK_ALL_TODOS = 'CHECK_ALL_TODOS';
-
+import { createSlice } from "@reduxjs/toolkit";
 
 // const addTodo= (title)=>({
 //    type: ADD_TODO,
@@ -29,10 +25,9 @@
 //     checkTodo,
 //     checkAllTodos
 // };
-import { createSlice } from '@reduxjs/toolkit';
 
 const todoSlice = createSlice({
-  name: 'todos',
+  name: "todos",
   initialState: {
     todos: [],
     currentId: 0,
@@ -41,7 +36,11 @@ const todoSlice = createSlice({
   },
   reducers: {
     addTodo: (state, action) => {
-      const newTodo = { id: state.currentId, title: action.payload.title, checked: false };
+      const newTodo = {
+        id: state.currentId,
+        title: action.payload.title,
+        checked: false,
+      };
       state.todos.push(newTodo);
       state.currentId += 1;
       state.remaining = state.todos.filter((todo) => !todo.checked).length;
@@ -61,12 +60,20 @@ const todoSlice = createSlice({
       state.remaining = state.todos.filter((todo) => !todo.checked).length;
     },
     checkAllTodos: (state) => {
-      state.todos = state.todos.map((todo) => ({ ...todo, checked: !state.allChecked }));
+      state.todos = state.todos.map((todo) => ({
+        ...todo,
+        checked: !state.allChecked,
+      }));
       state.allChecked = !state.allChecked;
       state.remaining = state.allChecked ? 0 : state.todos.length;
     },
   },
 });
 
-export const { addTodo, clearCheckedTodos, checkTodo, checkAllTodos } = todoSlice.actions;
+export const { addTodo, clearCheckedTodos, checkTodo, checkAllTodos } =
+  todoSlice.actions;
 export default todoSlice.reducer;
+export const ADD_TODO = "ADD_TODO";
+export const CLEAR_CHECKED_TODOS = "CLEAR_CHECKED_TODOS";
+export const CHECK_TODO = "CHECK_TODO";
+export const CHECK_ALL_TODOS = "CHECK_ALL_TODOS";
