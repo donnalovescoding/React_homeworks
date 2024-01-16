@@ -45,10 +45,10 @@ function App({todos,
 }
 
 const mapStateToProps = (state) => ({
-    todos: state.todos.todos,
-    currentId: state.todos.currentId,
-    allChecked: state.todos.allChecked,
-    remaining: state.todos.remaining,
+    todos: state.todos,
+    currentId: state.currentId,
+    allChecked: state.allChecked,
+    remaining: state.remaining,
   });
   
   const mapDispatchToProps = {
